@@ -1,0 +1,79 @@
+---
+title: "Tarea 2"
+author: "Jhanelly Chalá"
+date: "2023-10-10"
+output: pdf_document
+---
+
+# Introducción
+
+Importar paquete pandas
+
+```{python echo=TRUE}
+import pandas as pd
+```
+
+Cargar datos sobre la felicidad mundial
+
+La ruta del archivo .csv ha sido almacenada en una variable denominada *datos,* debido a que su extensión no beneficiaba la estética del informe.
+
+```{python include=FALSE}
+datos="https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-08-07/felicidad.csv"
+```
+
+```{python echo=TRUE}
+feli=pd.read_csv(datos, index_col=0)
+
+```
+
+¿Cuál es el primer año del set de datos?
+
+```{python echo=TRUE}
+feli.head()
+```
+
+¿Cuál es el último año del set de datos?
+
+```{python echo=TRUE}
+feli.tail()
+```
+
+# Desarrollo
+
+¿Cuál fue la media, cuartiles y la desviación estandar de la felicidad de los países a nivel mundial en el año 2008?
+
+```{python}
+medidas_2008=feli[feli["anio"]==2008]["escalera_vida"].describe()
+medidas_2008
+```
+
+¿Cuál fue el nivel de felicidad en Ecuador y Singapur para el mismo año?
+
+```{python echo=TRUE}
+paises_2008=feli[feli.anio==2008]
+paises=paises_2008.loc[["Ecuador","Singapur"],["escalera_vida"]]
+paises
+```
+
+¿Cuál fue la media, cuartiles y la desviación estandar de la felicidad de los países a nivel mundial en el año 2018?
+
+```{python}
+medidas_2018=feli[feli["anio"]==2018]["escalera_vida"].describe()
+medidas_2018
+```
+
+¿Cuál fue el nivel de felicidad en Ecuador y Singapur para el año 2018?
+
+```{python}
+paises_2018=feli[feli.anio==2018]
+paises=paises_2018.loc[["Ecuador","Singapur"],["escalera_vida"]]
+paises
+```
+
+# Conclusión
+
+Para el año 2008 el promedio en el puntaje de felicidad en los países a nivel mundial fue de **5.419** y su desviación estándar fue de **1.169**, esto significa que los puntajes de felicidad tienden a variar alrededor de la mediaen aproximadamente 1.17 unidades en la escala de 0 a 10. 
+
+El puntaje para Ecuador fue de **5.297** superando así al 50% de países con el puntaje más bajo, en cuanto a Singapur su nivel de felicidad se sitúa en **6.641**, superando a Ecuador con 1.34 puntos, entre los factores que determinan esta diferencia podrían ser el nivel renta per-cápita.
+
+Para el año 2018, el promedio mundíal aumentó ligeramente. Ecuador subió su puntaje a *6.12*, en este año se encontró muy cerca del puntaje de Singapur (*6.37*).
